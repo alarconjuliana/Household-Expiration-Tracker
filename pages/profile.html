@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile - Household Expiration Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Menu -->
+    <aside class="menu">
+        <h1>Expiration Tracker</h1>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="inventory.html">Inventory</a>
+            <a href="profile.html">Profile</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="page-header">
+            <div>
+                <h1>Profile</h1>
+                <p>Manage your account and view your item history.</p>
+            </div>
+        </header>
+
+
+        <!-- Account Information -->
+        <section class="profile-section">
+            <h2>Account Information</h2>
+            <div class="profile-info">
+                <div>
+                    <h3>Name</h3>
+                    <p>Juan dela Cruz</p>
+                </div>
+                <div>
+                    <h3>Email</h3>
+                    <p>juandelacruz@email.com</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Account Settings -->
+        <section class="profile-section">
+            <h2>Account Settings</h2>
+            <button id="changePasswordButton">
+                Change Password
+            </button>
+        </section>
+
+
+        <!-- Item History -->
+        <section class="profile-section">
+            <h2>Item History</h2>
+            <p>
+                View items that have been consumed or discarded.
+            </p>
+            <a href="item-history.html">
+                <button>View Item History</button>
+            </a>
+        </section>
+
+
+        <!-- Log Out -->
+        <section class="logout-section">
+            <button id="logoutButton">
+                Log Out
+            </button>
+        </section>
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

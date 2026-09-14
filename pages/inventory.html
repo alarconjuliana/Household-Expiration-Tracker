@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inventory - Household Expiration Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="logo">
+        Household Expiration Tracker
+    </div>
+    <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="inventory.html">Inventory</a>
+        <a href="profile.html">Profile</a>
+    </div>
+</nav>
+
+
+<!-- Main Content -->
+<main class="main-content">
+
+    <!-- Header -->
+    <header class="page-header">
+        <div>
+            <h1>Inventory</h1>
+            <p>View and manage your household items.</p>
+        </div>
+        <button id="addItemButton">Add Item</button>
+    </header>
+
+        <!-- Inventory Summary -->
+        <section class="inventory-summary">
+            <h2>Total Items</h2>
+            <p>2</p>
+        </section>
+
+        <!-- Inventory Controls -->
+        <section class="inventory-controls">
+
+            <!-- Search -->
+            <div class="search-container">
+                <label for="search-item">Search Items</label>
+                <input 
+                    type="text" 
+                    id="search-item" 
+                    placeholder="Search item name...">
+            </div>
+
+            <!-- Filter -->
+            <div class="filter-container">
+                <label for="filter-category">Filter</label>
+                <select id="filter-category">
+                    <option value="all">All Categories</option>
+                    <option value="food">Food</option>
+                    <option value="medicine">Medicine</option>
+                    <option value="toiletries">Toiletries</option>
+                    <option value="skincare">Skincare</option>
+                    <option value="cleaning">Cleaning Supplies</option>
+                    <option value="household">Household Supplies</option>
+                    <option value="pet">Pet Supplies</option>
+                    <option value="baby">Baby & Child Care</option>
+                    <option value="emergency">Emergency Supplies</option>
+                    <option value="others">Others</option>
+                </select>
+            </div>
+
+            <!-- Sort -->
+            <div class="sort-container">
+
+                <label for="sort-items">Sort By</label>
+
+                <select id="sort-items">
+                    <option value="name-az">Name: A to Z</option>
+                    <option value="name-za">Name: Z to A</option>
+                    <option value="expiration-asc">
+                        Expiration Date: Earliest to Latest
+                    </option>
+                    <option value="expiration-desc">
+                        Expiration Date: Latest to Earliest
+                    </option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Item List -->
+        <section class="inventory-list">
+
+            <h2>My Items</h2>
+
+            <!-- Item 1 -->
+            <div class="item-card">
+                <h3>Milk</h3>
+                <p>Category: Food</p>
+                <p>20 days left</p>
+                <div class="item-status">Soon</div>
+
+                <div class="item-actions">
+                    <button class="edit-button">Edit</button>
+                    <button class="delete-button">Delete</button>
+                    <button class="done-button">Mark as Done</button>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="item-card">
+                <h3>Face Cream</h3>
+                <p>Category: Skincare</p>
+                <p>10 days left</p>
+                <div class="item-status">Urgent</div>
+
+                <div class="item-actions">
+                    <button class="edit-button">Edit</button>
+                    <button class="delete-button">Delete</button>
+                    <button class="done-button">Mark as Done</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Log In - Household Expiration Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Menu -->
+    <aside class="menu">
+        <h1>Expiration Tracker</h1>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Log In</a>
+            <a href="signup.html">Sign Up</a>
+        </nav>
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="auth-content">
+
+        <!-- Log In Form -->
+        <section class="login-section">
+            <h2>Welcome Back</h2>
+            <p>
+                Log in to access your household expiration tracker.
+            </p>
+
+
+            <form id="loginForm">
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required>
+                </div>
+
+                <!-- Log In Button -->
+                <button type="submit">
+                    Log In
+                </button>
+            </form>
+
+            <!-- Sign Up Link -->
+            <p>
+                Don't have an account?
+                <a href="signup.html">Sign Up</a>
+            </p>
+        </section>
+
+        <!-- Back to Home -->
+        <a href="../index.html">
+            Back to Home
+        </a>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
