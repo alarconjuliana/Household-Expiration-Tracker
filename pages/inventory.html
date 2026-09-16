@@ -5,42 +5,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet"
+    >
+
     <title>Inventory - Household Expiration Tracker</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 
-    <!-- Navigation Bar -->
-<nav class="navbar">
-    <div class="logo">
-        Household Expiration Tracker
-    </div>
-    <div class="nav-links">
-        <a href="dashboard.html">Dashboard</a>
-        <a href="inventory.html">Inventory</a>
-        <a href="profile.html">Profile</a>
-    </div>
-</nav>
+    <!-- Navivation Menu -->
+    <aside class="menu">
+        <h1>Expiration Tracker</h1>
 
+        <nav>
+            <a href="dashboard.html">DASHBOARD</a>
+            <a href="inventory.html">INVENTORY</a>
+            <a href="profile.html">PROFILE</a>
+        </nav>
+    </aside>
 
-<!-- Main Content -->
-<main class="main-content">
+    <!-- Main Content -->
+    <main class="main-content">
 
-    <!-- Header -->
-    <header class="page-header">
-        <div>
-            <h1>Inventory</h1>
-            <p>View and manage your household items.</p>
-        </div>
-        <button id="addItemButton">Add Item</button>
-    </header>
+        <!-- Inventory Header -->
+        <header class="inventory-header">
+            <div>
+                <h1>Inventory</h1>
+                <p>View and manage your household items.</p>
+            </div>
+
+            <button id="addItemButton">Add Item</button>
+
+            <!-- Add Item Popup -->
+            <div id="addItemModal" class="modal">
+                <div class="modal-content">
+                    <h2>Add Item</h2>
+
+                    <form id="addItemForm">
+
+                        <!-- Item Name -->
+                        <div class="form-group">
+                            <label for="item-name">Name of Item</label>
+
+                            <input
+                                type="text"
+                                id="item-name"
+                                name="item-name"
+                                placeholder="Enter item name"
+                                required
+                            >
+                        </div>
+
+                        <!-- Category -->
+                        <div class="form-group">
+                            <label for="item-category">Category</label>
+
+                            <select id="item-category" name="item-category" required>
+                                <option value="">Select a category</option>
+                                <option value="food">Food</option>
+                                <option value="medicine">Medicine</option>
+                                <option value="toiletries">Toiletries</option>
+                                <option value="skincare">Skincare</option>
+                                <option value="cleaning">Cleaning Supplies</option>
+                                <option value="household">Household Supplies</option>
+                                <option value="pet">Pet Supplies</option>
+                                <option value="baby">Baby & Child Care</option>
+                                <option value="emergency">Emergency Supplies</option>
+                                <option value="others">Others</option>
+                            </select>
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="form-group">
+                            <label for="item-quantity">Quantity</label>
+
+                            <input
+                                type="number"
+                                id="item-quantity"
+                                name="item-quantity"
+                                min="1"
+                                placeholder="Optional"
+                            >
+                        </div>
+
+                        <!-- Expiration Date -->
+                        <div class="form-group">
+                            <label for="expiration-date">Expiration Date</label>
+
+                            <input
+                                type="date"
+                                id="expiration-date"
+                                name="expiration-date"
+                                required
+                            >
+                        </div>
+
+                        <!-- Form Buttons -->
+                        <button type="submit">Save Item</button>
+
+                        <button type="button" id="closeAddItemButton">
+                            Cancel
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </header>
 
         <!-- Inventory Summary -->
         <section class="inventory-summary">
-            <h2>Total Items</h2>
-            <p>2</p>
+            <h2>TOTAL ITEMS:</h2>
+            <p id="inventory-total-items">0</p>
         </section>
 
         <!-- Inventory Controls -->
@@ -49,15 +138,18 @@
             <!-- Search -->
             <div class="search-container">
                 <label for="search-item">Search Items</label>
-                <input 
-                    type="text" 
-                    id="search-item" 
-                    placeholder="Search item name...">
+
+                <input
+                    type="text"
+                    id="search-item"
+                    placeholder="Search item name..."
+                >
             </div>
 
             <!-- Filter -->
             <div class="filter-container">
                 <label for="filter-category">Filter</label>
+
                 <select id="filter-category">
                     <option value="all">All Categories</option>
                     <option value="food">Food</option>
@@ -75,7 +167,6 @@
 
             <!-- Sort -->
             <div class="sort-container">
-
                 <label for="sort-items">Sort By</label>
 
                 <select id="sort-items">
@@ -89,45 +180,99 @@
                     </option>
                 </select>
             </div>
+
         </section>
 
         <!-- Item List -->
         <section class="inventory-list">
-
             <h2>My Items</h2>
-
-            <!-- Item 1 -->
-            <div class="item-card">
-                <h3>Milk</h3>
-                <p>Category: Food</p>
-                <p>20 days left</p>
-                <div class="item-status">Soon</div>
-
-                <div class="item-actions">
-                    <button class="edit-button">Edit</button>
-                    <button class="delete-button">Delete</button>
-                    <button class="done-button">Mark as Done</button>
-                </div>
-            </div>
-
-            <!-- Item 2 -->
-            <div class="item-card">
-                <h3>Face Cream</h3>
-                <p>Category: Skincare</p>
-                <p>10 days left</p>
-                <div class="item-status">Urgent</div>
-
-                <div class="item-actions">
-                    <button class="edit-button">Edit</button>
-                    <button class="delete-button">Delete</button>
-                    <button class="done-button">Mark as Done</button>
-                </div>
-            </div>
         </section>
+
+        <!-- Item Details Popup -->
+        <div id="itemDetailsModal" class="modal">
+            <div class="modal-content">
+
+                <h2 id="details-name"></h2>
+
+                <p>
+                    Category:
+                    <span id="details-category"></span>
+                </p>
+
+                <p>
+                    Quantity:
+                    <span id="details-quantity"></span>
+                </p>
+
+                <p>
+                    Expiration Date:
+                    <span id="details-expiration"></span>
+                </p>
+
+                <p>
+                    Days Left:
+                    <span id="details-days-left"></span>
+                </p>
+
+                <div id="details-status" class="item-status"></div>
+
+                <div class="item-actions">
+                    <button id="editItemButton">Edit</button>
+                    <button id="deleteItemButton">Delete</button>
+                    <button id="doneItemButton">Mark as Done</button>
+                </div>
+
+                <button type="button" id="closeDetailsButton">
+                    Close
+                </button>
+
+            </div>
+        </div>
+
+        <!-- Mark as Done Popup -->
+        <div id="doneItemModal" class="modal">
+            <div class="modal-content">
+
+                <h2>Mark Item as Done</h2>
+
+                <p>What happened to this item?</p>
+
+                <div class="done-actions">
+                    <button id="consumedButton">Consumed</button>
+                    <button id="discardedButton">Discarded</button>
+                </div>
+
+                <button type="button" id="cancelDoneButton">
+                    Cancel
+                </button>
+
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Popup -->
+        <div id="deleteConfirmModal" class="modal">
+            <div class="modal-content delete-confirm-content">
+
+                <h2>Delete Item</h2>
+
+                <p>Are you sure you want to delete this item?</p>
+
+                <div class="delete-actions">
+                    <button type="button" id="cancelDeleteButton">
+                        Cancel
+                    </button>
+
+                    <button type="button" id="confirmDeleteButton">
+                        Delete
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
     </main>
 
-
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
 
 </body>
 
