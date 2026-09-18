@@ -27,9 +27,10 @@
 
 <body>
 
-    <!-- Menu -->
+    <!-- Navigation Menu -->
     <aside class="menu">
         <h1>Expiration Tracker</h1>
+
         <nav>
             <a href="dashboard.html">DASHBOARD</a>
             <a href="inventory.html">INVENTORY</a>
@@ -37,11 +38,10 @@
         </nav>
     </aside>
 
-
     <!-- Main Content -->
     <main class="main-content">
 
-        <!-- Header -->
+        <!-- Dashboard Header -->
         <header class="dashboard-header">
             <div>
                 <h2>Dashboard</h2>
@@ -49,70 +49,50 @@
             </div>
         </header>
 
-
         <!-- Expiration Status Counters -->
         <section class="status-section">
 
             <div class="status-card good">
                 <h3>Good</h3>
-                <p>10</p>
+                <p id="good-count">0</p>
                 <span>31+ days</span>
             </div>
 
             <div class="status-card soon">
                 <h3>Soon</h3>
-                <p>8</p>
+                <p id="soon-count">0</p>
                 <span>16–30 days</span>
             </div>
 
             <div class="status-card urgent">
                 <h3>Urgent</h3>
-                <p>3</p>
+                <p id="urgent-count">0</p>
                 <span>8–15 days</span>
             </div>
 
             <div class="status-card critical">
                 <h3>Critical</h3>
-                <p>2</p>
+                <p id="critical-count">0</p>
                 <span>1–7 days</span>
             </div>
 
             <div class="status-card expired">
                 <h3>Expired</h3>
-                <p>8</p>
+                <p id="expired-count">0</p>
                 <span>0 or fewer days</span>
             </div>
 
         </section>
 
-
         <!-- Items Needing Attention -->
         <section class="attention-section">
             <h2>Items Needing Attention</h2>
 
-            <div class="item-list">
+            <div class="item-list" id="attention-list"></div>
 
-                <!-- Item 1 -->
-                <div class="dashboard-item-card">
-                    <div class="item-info">
-                        <h3>Milk</h3>
-                        <h4>Food</h4>
-                        <p>20 days left</p>
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="dashboard-item-card">
-                    <div class="item-info">
-                        <h3>Face Cream</h3>
-                        <h4>Skincare</h4>
-                        <p>10 days left</p>
-                    </div>
-                </div>
-            </div>
         </section>
-    </main>
 
+    </main>
 
     <script src="../js/script.js"></script>
 

@@ -2,7 +2,7 @@
 // FORMATTING FUNCTIONS
 // ========================================
 
-// Format Item Name
+// Format item name with capitalized words
 function formatItemName(name) {
     return name
         .toLowerCase()
@@ -13,7 +13,7 @@ function formatItemName(name) {
         .join(" ");
 }
 
-// Format Expiration Date
+// Format date into a readable format
 function formatExpirationDate(dateString) {
     const date = new Date(dateString + "T00:00:00");
 
@@ -23,6 +23,7 @@ function formatExpirationDate(dateString) {
         year: "numeric"
     });
 }
+
 
 // ========================================
 // DOM ELEMENTS AND VARIABLES
@@ -59,16 +60,17 @@ const sortItems = document.getElementById("sort-items");
 const inventoryList = document.querySelector(".inventory-list");
 const inventoryTotalItems = document.getElementById("inventory-total-items");
 
-// Selected Item and Edit Mode
+// Store the currently selected item and edit mode
 let selectedItem = null;
 let editMode = false;
+
 
 // ========================================
 // ADD ITEM
 // ========================================
 
 // Open Add Item Popup
-addItemButton.addEventListener("click", function() {
+addItemButton?.addEventListener("click", function() {
     editMode = false;
     selectedItem = null;
     addItemForm.reset();
@@ -76,16 +78,16 @@ addItemButton.addEventListener("click", function() {
 });
 
 // Close Add Item Popup
-closeAddItemButton.addEventListener("click", function() {
+closeAddItemButton?.addEventListener("click", function() {
     addItemModal.style.display = "none";
     addItemForm.reset();
 });
 
-// Save Item
-addItemForm.addEventListener("submit", function(event) {
+// Save new item or update existing item
+addItemForm?.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    // Get item information
+    // Get item information from the form
     const itemName = formatItemName(
         document.getElementById("item-name").value.trim()
     );
@@ -96,16 +98,20 @@ addItemForm.addEventListener("submit", function(event) {
     const itemQuantity = document.getElementById("item-quantity").value;
     const expirationDate = document.getElementById("expiration-date").value;
 
-    // Calculate days left
+    // Calculate the number of days left
     const today = new Date();
-    const expiration = new Date(expirationDate);
+    today.setHours(0, 0, 0, 0);
+
+    const expiration = new Date(expirationDate + "T00:00:00");
+    expiration.setHours(0, 0, 0, 0);
+
     const difference = expiration - today;
 
-    const daysLeft = Math.ceil(
+    const daysLeft = Math.round(
         difference / (1000 * 60 * 60 * 24)
     );
 
-    // Determine status
+    // Determine the item status
     let status;
 
     if (daysLeft <= 0) {
@@ -120,9 +126,9 @@ addItemForm.addEventListener("submit", function(event) {
         status = "Good";
     }
 
-    // Edit Existing Item
+    // Update an existing item
     if (editMode && selectedItem) {
-        // Update stored information
+        // Update the stored item information
         selectedItem.dataset.name = itemName;
         selectedItem.dataset.category = itemCategory;
         selectedItem.dataset.quantity = itemQuantity;
@@ -130,11 +136,17 @@ addItemForm.addEventListener("submit", function(event) {
         selectedItem.dataset.daysLeft = daysLeft;
         selectedItem.dataset.status = status;
 
-        // Update card appearance
+        // Move the edited item to the top of the list
+        inventoryList.insertBefore(
+            selectedItem,
+            inventoryList.children[1]
+        );
+
+        // Update the item's status appearance
         selectedItem.className =
             "inventory-item-card " + status.toLowerCase();
 
-        // Update card information
+        // Update the item's displayed information
         selectedItem.innerHTML = `
             <h3>${itemName}</h3>
             <h4>${itemCategory}</h4>
@@ -142,20 +154,20 @@ addItemForm.addEventListener("submit", function(event) {
             <div class="item-status">${status}</div>
         `;
 
-        // Save changes
+        // Save the updated inventory
         saveInventory();
 
         // Exit edit mode
         editMode = false;
 
-        // Close form
+        // Close and reset the form
         addItemModal.style.display = "none";
         addItemForm.reset();
 
         return;
     }
 
-    // Add New Item
+    // Create a new item
     const newItemData = {
         name: itemName,
         category: itemCategory,
@@ -170,28 +182,30 @@ addItemForm.addEventListener("submit", function(event) {
     updateTotalItems();
     saveInventory();
 
-    // Close Add Item Popup
+    // Close the Add Item Popup
     addItemModal.style.display = "none";
 
-    // Clear form
+    // Clear the form
     addItemForm.reset();
 });
+
 
 // ========================================
 // ITEM DETAILS
 // ========================================
 
 // Close Item Details Popup
-closeDetailsButton.addEventListener("click", function() {
+closeDetailsButton?.addEventListener("click", function() {
     itemDetailsModal.style.display = "none";
 });
+
 
 // ========================================
 // EDIT ITEM
 // ========================================
 
-// Edit Item
-editItemButton.addEventListener("click", function() {
+// Open the Edit Item form
+editItemButton?.addEventListener("click", function() {
     if (!selectedItem) {
         return;
     }
@@ -218,12 +232,13 @@ editItemButton.addEventListener("click", function() {
     itemDetailsModal.style.display = "none";
 });
 
+
 // ========================================
 // DELETE ITEM
 // ========================================
 
 // Open Delete Confirmation Popup
-deleteItemButton.addEventListener("click", function(event) {
+deleteItemButton?.addEventListener("click", function(event) {
     event.stopPropagation();
 
     if (!selectedItem) {
@@ -234,16 +249,17 @@ deleteItemButton.addEventListener("click", function(event) {
     deleteConfirmModal.style.display = "block";
 });
 
-// Confirm Delete
-confirmDeleteButton.addEventListener("click", function(event) {
+// Delete the selected item
+confirmDeleteButton?.addEventListener("click", function(event) {
     event.stopPropagation();
 
     if (!selectedItem) {
         return;
     }
 
-    selectedItem.remove();
+    saveToHistory(selectedItem, "Deleted");
 
+    selectedItem.remove();
     updateTotalItems();
     saveInventory();
 
@@ -251,20 +267,21 @@ confirmDeleteButton.addEventListener("click", function(event) {
     selectedItem = null;
 });
 
-// Cancel Delete
-cancelDeleteButton.addEventListener("click", function(event) {
+// Cancel Delete Confirmation
+cancelDeleteButton?.addEventListener("click", function(event) {
     event.stopPropagation();
 
     deleteConfirmModal.style.display = "none";
     itemDetailsModal.style.display = "block";
 });
 
+
 // ========================================
 // MARK AS DONE
 // ========================================
 
 // Open Mark as Done Popup
-doneItemButton.addEventListener("click", function(event) {
+doneItemButton?.addEventListener("click", function(event) {
     event.stopPropagation();
 
     if (!selectedItem) {
@@ -278,63 +295,80 @@ doneItemButton.addEventListener("click", function(event) {
     doneItemModal.style.display = "block";
 });
 
-// Mark Item as Consumed
-consumedButton.addEventListener("click", function(event) {
-    event.stopPropagation();
+// Save a completed or deleted item to history
+function saveToHistory(item, action) {
+    const savedHistory = localStorage.getItem("itemHistory");
 
-    if (!selectedItem) {
-        return;
+    let history = [];
+
+    if (savedHistory) {
+        history = JSON.parse(savedHistory);
     }
 
-    // Remove item from inventory
-    selectedItem.remove();
+    const historyItem = {
+        name: item.dataset.name,
+        category: item.dataset.category,
+        quantity: item.dataset.quantity,
+        expiration: item.dataset.expiration,
+        status: item.dataset.status,
+        action: action,
+        actionDate: new Date().getFullYear() + "-" +
+            String(new Date().getMonth() + 1).padStart(2, "0") +
+            "-" +
+            String(new Date().getDate()).padStart(2, "0")
+    };
 
-    // Update total items
-    updateTotalItems();
-    saveInventory();
+    history.push(historyItem);
 
-    // Close Mark as Done Popup
-    doneItemModal.style.display = "none";
+    localStorage.setItem("itemHistory", JSON.stringify(history));
+}
 
-    // Clear selected item
-    selectedItem = null;
-});
+// Mark Item as Consumed
+if (consumedButton) {
+    consumedButton.addEventListener("click", function() {
+        if (!selectedItem) {
+            return;
+        }
+
+        saveToHistory(selectedItem, "Consumed");
+        selectedItem.remove();
+        updateTotalItems();
+        saveInventory();
+        doneItemModal.style.display = "none";
+        selectedItem = null;
+    });
+}
 
 // Mark Item as Discarded
-discardedButton.addEventListener("click", function(event) {
-    event.stopPropagation();
+if (discardedButton) {
+    discardedButton.addEventListener("click", function() {
+        if (!selectedItem) {
+            return;
+        }
 
-    if (!selectedItem) {
-        return;
-    }
-
-    // Remove item from inventory
-    selectedItem.remove();
-
-    // Update total items
-    updateTotalItems();
-    saveInventory();
-
-    // Close Mark as Done Popup
-    doneItemModal.style.display = "none";
-
-    // Clear selected item
-    selectedItem = null;
-});
+        saveToHistory(selectedItem, "Discarded");
+        selectedItem.remove();
+        updateTotalItems();
+        saveInventory();
+        doneItemModal.style.display = "none";
+        selectedItem = null;
+    });
+}
 
 // Cancel Mark as Done
-cancelDoneButton.addEventListener("click", function(event) {
+cancelDoneButton?.addEventListener("click", function(event) {
     event.stopPropagation();
 
     // Close Mark as Done Popup
     doneItemModal.style.display = "none";
 });
+
 
 // ========================================
 // INVENTORY CONTROLS
 // ========================================
 
-// Total Inventory Counter
+// Update the total number of inventory items
 function updateTotalItems() {
     const totalItems =
         inventoryList.querySelectorAll(".inventory-item-card").length;
@@ -342,7 +376,7 @@ function updateTotalItems() {
     inventoryTotalItems.textContent = totalItems;
 }
 
-// Apply Search and Filter
+// Apply search text and category filter
 function filterItems() {
     const searchText = searchInput.value.toLowerCase();
     const selectedCategory = categoryFilter.value;
@@ -368,7 +402,7 @@ function filterItems() {
     });
 }
 
-// Convert Filter Value into Category Name
+// Convert the filter value into the category name
 function getCategoryName(category) {
     const categories = {
         food: "food",
@@ -386,7 +420,7 @@ function getCategoryName(category) {
     return categories[category];
 }
 
-// Convert Category Name into Select Value
+// Convert the category name into the select value
 function getCategoryValue(categoryName) {
     const categories = {
         "Food": "food",
@@ -404,7 +438,7 @@ function getCategoryValue(categoryName) {
     return categories[categoryName];
 }
 
-// Sort Items
+// Sort inventory items
 function sortInventory() {
     const selectedSort = sortItems.value;
 
@@ -413,24 +447,24 @@ function sortInventory() {
     );
 
     itemCards.sort(function(a, b) {
-        // Sort by Name A-Z
+        // Sort by name A-Z
         if (selectedSort === "name-az") {
             return a.dataset.name.localeCompare(b.dataset.name);
         }
 
-        // Sort by Name Z-A
+        // Sort by name Z-A
         if (selectedSort === "name-za") {
             return b.dataset.name.localeCompare(a.dataset.name);
         }
 
-        // Sort by Expiration Date Earliest-Latest
+        // Sort by expiration date earliest to latest
         if (selectedSort === "expiration-asc") {
             return a.dataset.expiration.localeCompare(
                 b.dataset.expiration
             );
         }
 
-        // Sort by Expiration Date Latest-Earliest
+        // Sort by expiration date latest to earliest
         if (selectedSort === "expiration-desc") {
             return b.dataset.expiration.localeCompare(
                 a.dataset.expiration
@@ -438,32 +472,33 @@ function sortInventory() {
         }
     });
 
-    // Put the Sorted Cards Back into My Items
+    // Put the sorted cards back into the inventory list
     itemCards.forEach(function(card) {
         inventoryList.appendChild(card);
     });
 }
 
-// Search when user types
-searchInput.addEventListener("input", function() {
+// Search when the user types
+searchInput?.addEventListener("input", function() {
     filterItems();
 });
 
-// Filter when category changes
-categoryFilter.addEventListener("change", function() {
+// Filter when the category changes
+categoryFilter?.addEventListener("change", function() {
     filterItems();
 });
 
-// Sort when sorting option changes
-sortItems.addEventListener("change", function() {
+// Sort when the sorting option changes
+sortItems?.addEventListener("change", function() {
     sortInventory();
 });
+
 
 // ========================================
 // LOCAL STORAGE
 // ========================================
 
-// Save Inventory to Local Storage
+// Save inventory items to Local Storage
 function saveInventory() {
     const items = [];
 
@@ -484,10 +519,12 @@ function saveInventory() {
     localStorage.setItem("inventoryItems", JSON.stringify(items));
 }
 
+
 // ========================================
 // CREATE INVENTORY CARD
 // ========================================
 
+// Create an inventory card for an item
 function createInventoryCard(item) {
     const newItem = document.createElement("div");
 
@@ -510,6 +547,7 @@ function createInventoryCard(item) {
         <div class="item-status">${item.status}</div>
     `;
 
+    // Open Item Details Popup when the card is clicked
     newItem.addEventListener("click", function() {
         selectedItem = this;
 
@@ -534,14 +572,16 @@ function createInventoryCard(item) {
         itemDetailsModal.style.display = "block";
     });
 
-    inventoryList.appendChild(newItem);
+    // Add the newest item to the top of the list
+    inventoryList.insertBefore(newItem, inventoryList.children[1]);
 }
+
 
 // ========================================
 // LOAD INVENTORY
 // ========================================
 
-// Load Inventory from Local Storage
+// Load saved inventory items from Local Storage
 function loadInventory() {
     const savedItems = localStorage.getItem("inventoryItems");
 
@@ -551,12 +591,170 @@ function loadInventory() {
 
     const items = JSON.parse(savedItems);
 
-    items.forEach(function(item) {
-        createInventoryCard(item);
-    });
+    for (let i = items.length - 1; i >= 0; i--) {
+        createInventoryCard(items[i]);
+    }
 
     updateTotalItems();
 }
 
-// Load Inventory when Page Opens
-loadInventory();
+// Load inventory when the page opens
+if (inventoryList) {
+    loadInventory();
+}
+
+
+// ========================================
+// DASHBOARD
+// ========================================
+
+// Load dashboard information
+function loadDashboard() {
+    const savedItems = localStorage.getItem("inventoryItems");
+
+    if (!savedItems) {
+        return;
+    }
+
+    const items = JSON.parse(savedItems);
+
+    let goodCount = 0;
+    let soonCount = 0;
+    let urgentCount = 0;
+    let criticalCount = 0;
+    let expiredCount = 0;
+
+    items.forEach(function(item) {
+        // Get today's date
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Get the item's expiration date
+        const expiration = new Date(item.expiration + "T00:00:00");
+        expiration.setHours(0, 0, 0, 0);
+
+        // Calculate the number of days left
+        const difference = expiration - today;
+
+        const daysLeft = Math.round(
+            difference / (1000 * 60 * 60 * 24)
+        );
+
+        item.daysLeft = daysLeft;
+
+        // Update the item's status
+        if (daysLeft <= 0) {
+            item.status = "Expired";
+            expiredCount++;
+        } else if (daysLeft <= 7) {
+            item.status = "Critical";
+            criticalCount++;
+        } else if (daysLeft <= 15) {
+            item.status = "Urgent";
+            urgentCount++;
+        } else if (daysLeft <= 30) {
+            item.status = "Soon";
+            soonCount++;
+        } else {
+            item.status = "Good";
+            goodCount++;
+        }
+    });
+
+    // Save updated days left and status
+    localStorage.setItem("inventoryItems", JSON.stringify(items));
+
+    // Display the status counts
+    document.getElementById("good-count").textContent = goodCount;
+    document.getElementById("soon-count").textContent = soonCount;
+    document.getElementById("urgent-count").textContent = urgentCount;
+    document.getElementById("critical-count").textContent = criticalCount;
+    document.getElementById("expired-count").textContent = expiredCount;
+
+    const attentionList = document.getElementById("attention-list");
+
+    // Get items that need attention
+    const attentionItems = items.filter(function(item) {
+        return Number(item.daysLeft) <= 30;
+    });
+
+    // Sort by days left, then alphabetically when days are equal
+    attentionItems.sort(function(a, b) {
+        const daysDifference =
+            Number(a.daysLeft) - Number(b.daysLeft);
+
+        if (daysDifference !== 0) {
+            return daysDifference;
+        }
+
+        return a.name.localeCompare(b.name);
+    });
+
+    // Display items that need attention
+    attentionItems.forEach(function(item) {
+        const itemCard = document.createElement("div");
+
+        itemCard.classList.add(
+            "dashboard-item-card",
+            item.status.toLowerCase()
+        );
+
+        itemCard.innerHTML = `
+            <div class="item-info">
+                <h3>${item.name}</h3>
+                <h4>${item.category}</h4>
+                <p>${item.daysLeft} days left</p>
+            </div>
+            <div class="item-status">${item.status}</div>
+        `;
+
+        attentionList.appendChild(itemCard);
+    });
+}
+
+// Load dashboard when the page opens
+if (document.getElementById("attention-list")) {
+    loadDashboard();
+}
+
+
+// ========================================
+// ITEM HISTORY
+// ========================================
+
+// Load saved item history from Local Storage
+function loadHistory() {
+    const historyList = document.getElementById("history-list");
+
+    if (!historyList) {
+        return;
+    }
+
+    const savedHistory = localStorage.getItem("itemHistory");
+
+    if (!savedHistory) {
+        return;
+    }
+
+    const history = JSON.parse(savedHistory);
+
+    // Display each history record in the table
+    history.forEach(function(item) {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>${item.category}</td>
+            <td>${item.quantity || "Not specified"}</td>
+            <td>${formatExpirationDate(item.expiration)}</td>
+            <td>${item.status}</td>
+            <td>${item.action}</td>
+            <td>${formatExpirationDate(item.actionDate)}</td>
+        `;
+
+        historyList.appendChild(row);
+    });
+}
+
+// Load item history when the page opens
+loadHistory();
