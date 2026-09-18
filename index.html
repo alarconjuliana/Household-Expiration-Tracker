@@ -1,132 +1,629 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShelfLife — Household Expiry & Disaster Prep Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
-        rel="stylesheet"
-    >
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Top Navigation -->
+    <header class="navbar">
+      <div class="container nav-wrapper">
+        <a href="#" class="brand">
+          <div class="brand-icon">🌱</div>
+          <span>ShelfLife</span>
+        </a>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet"
-    >
-
-    <title>Home - Household Expiration Tracker</title>
-
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
-    <!-- Menu -->
-    <aside class="menu">
-        <h1>Expiration Tracker</h1>
         <nav>
-            <a href="index.html">HOME</a>
-            <a href="pages/about.html">ABOUT</a>
-            <a href="pages/login.html">LOG IN</a>
-            <a href="pages/signup.html">SIGN UP</a>
+          <ul class="nav-links">
+            <li><a href="#features" class="nav-link">Features</a></li>
+            <li><a href="#tracker" class="nav-link">Live Tracker</a></li>
+            <li><a href="#gobag" class="nav-link">🚨 Go-Bag Guide</a></li>
+            <li><a href="#calculator" class="nav-link">₱ Savings</a></li>
+            <li><a href="#faq" class="nav-link">FAQ</a></li>
+          </ul>
         </nav>
-    </aside>
 
+        <div class="nav-actions">
+          <div id="authContainer">
+            <button
+              class="btn btn-primary btn-sm"
+              onclick="openAuthModal('signin')"
+            >
+              Sign In
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
 
-    <!-- Main Content -->
-    <main class="home-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="hero-badge">
+          <span> Household Waste & Disaster Readiness</span>
+        </div>
+        <h1 class="hero-title">
+          Track daily food & keep your <span>emergency go-bag</span> fresh.
+        </h1>
+        <p class="hero-sub">
+          ShelfLife automatically monitors your kitchen groceries, family
+          medicine, and disaster go-bag supplies so emergency rations and
+          first-aid kits are never expired when you need them most.
+        </p>
 
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <h2>Household Expiration Tracker</h2>
+        <div class="hero-ctas">
+          <a href="#tracker" class="btn btn-primary">Try Live Tracker</a>
+          <a href="#gobag" class="btn btn-danger">Disaster Go-Bag Prep</a>
+          <a href="#features" class="btn btn-secondary">Explore Features</a>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <h4>₱80,000+</h4>
+            <p>Avg. Annual Savings</p>
+          </div>
+          <div class="stat-card">
+            <h4>100%</h4>
+            <p>Disaster Bag Readiness</p>
+          </div>
+          <div class="stat-card">
+            <h4>38%</h4>
+            <p>Less Food Wasted</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dedicated Features Section -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-head">
+          <h2>Engineered for Zero Waste & Emergency Safety</h2>
+          <p>
+            Everything you need to keep your pantry organized, fresh, and
+            disaster-ready.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⏳</div>
+            <h3>Smart Urgency Alerts</h3>
             <p>
-                A simple way to keep your household items organized
-                and stay aware of their expiration dates.
+              Calculates remaining shelf life each day and flags items as
+              <strong>Expired</strong>, <strong>Use Today</strong>, or
+              <strong>Expiring Soon</strong>.
             </p>
-            <a href="pages/signup.html">
-                <button>Get Started</button>
-            </a>
-        </section>
+          </div>
 
+          <div class="feature-card">
+            <div class="feature-icon">🎒</div>
+            <h3>Emergency Go-Bag Zone</h3>
+            <p>
+              Monitor emergency rations, canned goods, water purification
+              tablets, and medical kits before a fire, flood, or typhoon
+              strikes.
+            </p>
+          </div>
 
-        <!-- Why Use It -->
-        <section class="why-use-section">
-            <h2>Why Use Expiration Tracker?</h2>
-            <div class="benefits">
-                <div class="benefit">
-                    <h3>Stay Organized</h3>
-                    <p>
-                        Keep your household items and their
-                        expiration dates in one place.
-                    </p>
-                </div>
+          <div class="feature-card">
+            <div class="feature-icon">🗂️</div>
+            <h3>Zone Categorization</h3>
+            <p>
+              Segment items cleanly across Fridge, Dry Pantry, Medicine,
+              Cosmetics, and Emergency Kits with instant pill filters.
+            </p>
+          </div>
 
-                <div class="benefit">
-                    <h3>Know What Needs Attention</h3>
-                    <p>
-                        Quickly identify items that are getting
-                        close to their expiration date.
-                    </p>
-                </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Local & Cloud Sync</h3>
+            <p>
+              Inventory survives browser closures and device restarts
+              automatically via local cache and optional cloud login.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                <div class="benefit">
-                    <h3>Keep Track of Your Items</h3>
-                    <p>
-                        Maintain a record of your current and
-                        previously handled household items.
-                    </p>
-                </div>
+    <!-- Dedicated Live Tracker Section -->
+    <section class="tracker-section" id="tracker">
+      <div class="container">
+        <div class="section-head">
+          <h2>Pantry, Fridge & Go-Bag Inventory</h2>
+          <p>
+            Add, monitor, search, and manage your household items in real time.
+          </p>
+        </div>
 
+        <div class="tracker-wrapper">
+          <div class="tracker-card">
+            <div class="tracker-header">
+              <div class="tracker-header-left">
+                <div class="dot-pulse"></div>
+                <h3>Active Supplies Monitor</h3>
+              </div>
+              <div class="sync-pill" id="syncStatusPill">
+                <span>● Local Storage Active</span>
+              </div>
             </div>
 
-        </section>
+            <div class="tracker-body">
+              <!-- Controls -->
+              <div class="tracker-controls">
+                <div class="search-filter-row">
+                  <div class="search-box">
+                    <span class="search-icon">🔍</span>
+                    <input
+                      type="text"
+                      id="searchInput"
+                      placeholder="Search items (e.g. Milk, Water Tablets, Canned Tuna)..."
+                      oninput="renderItems()"
+                    />
+                  </div>
+                  <select
+                    id="sortSelect"
+                    class="select-sort"
+                    onchange="renderItems()"
+                  >
+                    <option value="urgency">
+                      Sort by: Urgency (Expiring First)
+                    </option>
+                    <option value="name">Sort by: Name (A-Z)</option>
+                    <option value="category">Sort by: Category</option>
+                  </select>
+                </div>
 
+                <div class="filter-pills">
+                  <button
+                    class="filter-pill active"
+                    onclick="setCategoryFilter('all', this)"
+                  >
+                    All Items
+                  </button>
+                  <button
+                    class="filter-pill filter-pill-urgent"
+                    onclick="setCategoryFilter('critical', this)"
+                  >
+                    ⚠️ Expiring Soon
+                  </button>
+                  <button
+                    class="filter-pill filter-pill-gobag"
+                    onclick="setCategoryFilter('gobag', this)"
+                  >
+                    🎒 Emergency Go-Bag
+                  </button>
+                  <button
+                    class="filter-pill"
+                    onclick="setCategoryFilter('fridge', this)"
+                  >
+                    Fridge
+                  </button>
+                  <button
+                    class="filter-pill"
+                    onclick="setCategoryFilter('pantry', this)"
+                  >
+                    Pantry
+                  </button>
+                  <button
+                    class="filter-pill"
+                    onclick="setCategoryFilter('medicine', this)"
+                  >
+                    Medicine
+                  </button>
+                  <button
+                    class="filter-pill"
+                    onclick="setCategoryFilter('cosmetics', this)"
+                  >
+                    Cosmetics
+                  </button>
+                </div>
 
-        <!-- Simple Introduction -->
-        <section class="home-introduction">
-            <h2>Keep Your Household on Track</h2>
-            <p>
-                From food and medicine to skincare and household
-                supplies, Expiration Tracker helps you keep an
-                organized view of the items in your home.
+                <!-- Collapsible Add Item Bar -->
+                <div>
+                  <div class="add-form-trigger" onclick="toggleAddForm()">
+                    <span>➕ Add New Item (Grocery or Go-Bag)</span>
+                    <span id="formChevron">▼</span>
+                  </div>
+                  <form
+                    id="addItemForm"
+                    class="drawer-form"
+                    onsubmit="handleAddItem(event)"
+                  >
+                    <div class="drawer-grid">
+                      <div class="input-group">
+                        <label>Item Name</label>
+                        <input
+                          type="text"
+                          id="itemNameInput"
+                          placeholder="e.g., Water Purification Tablets / Canned Tuna"
+                          required
+                        />
+                      </div>
+                      <div class="input-group">
+                        <label>Category</label>
+                        <select id="itemCategorySelect">
+                          <option value="gobag">🎒 Emergency Go-Bag</option>
+                          <option value="fridge">Fridge</option>
+                          <option value="pantry">Pantry</option>
+                          <option value="medicine">Medicine</option>
+                          <option value="cosmetics">Cosmetics</option>
+                        </select>
+                      </div>
+                      <div class="input-group">
+                        <label>Expiry / Rotation Date</label>
+                        <input type="date" id="itemDateInput" required />
+                      </div>
+                      <div>
+                        <button
+                          type="submit"
+                          class="btn btn-primary"
+                          style="height: 38px"
+                        >
+                          Save Item
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <!-- Item Container -->
+              <div
+                class="items-container"
+                id="itemsContainer"
+                aria-live="polite"
+              >
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <div class="tracker-footer">
+              <span id="itemsSummaryCount">0 items tracked</span>
+              <div style="display: flex; gap: 10px">
+                <button
+                  class="btn btn-sm btn-outline"
+                  onclick="consumeAllExpired()"
+                  title="Batch action"
+                >
+                  Clear Expired
+                </button>
+                <button
+                  class="btn btn-sm btn-secondary"
+                  onclick="seedSampleData()"
+                >
+                  Reset Demo Data
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emergency Go-Bag Essentials Guide Section -->
+    <section class="gobag-section" id="gobag">
+      <div class="container">
+        <div class="section-head">
+          <h2>🚨 72-Hour Emergency Go-Bag Guide</h2>
+          <p>
+            During a fire, flood, or earthquake, you have seconds to evacuate.
+            Keep these critical items tracked and rotated every 6 months.
+          </p>
+        </div>
+
+        <div class="gobag-grid">
+          <div class="gobag-box">
+            <h4>🍞 Food & Water Supplies</h4>
+            <ul>
+              <li>4–5 liters of potable drinking water per person</li>
+              <li>Ready-to-eat canned goods (tuna, corned beef, beans)</li>
+              <li>High-calorie energy bars, crackers, and biscuits</li>
+              <li>Manual can opener and durable plastic utensils</li>
+            </ul>
+          </div>
+
+          <div class="gobag-box">
+            <h4>💊 Medical & Sanitation</h4>
+            <ul>
+              <li>Prescription medications (7-day emergency supply)</li>
+              <li>First-aid kit (gauze, antiseptic, burn ointments)</li>
+              <li>Water purification tablets or drops</li>
+              <li>N95 face masks (crucial for fire smoke & debris)</li>
+            </ul>
+          </div>
+
+          <div class="gobag-box">
+            <h4>🔦 Survival & Documents</h4>
+            <ul>
+              <li>Heavy-duty LED flashlight & extra fresh batteries</li>
+              <li>Whistle (to signal search and rescue teams)</li>
+              <li>Sealed waterproof pouch with IDs, deeds, and cash</li>
+              <li>Power bank, USB cable, and hand-crank emergency radio</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Money Saved Simulator (Philippine Peso) -->
+    <section class="calc-section" id="calculator">
+      <div class="container">
+        <div class="section-head">
+          <h2>Household Savings Calculator</h2>
+          <p>
+            Calculate how much your household saves in Philippine Pesos (₱) by
+            eliminating grocery waste and avoiding expired emergency rations.
+          </p>
+        </div>
+
+        <div class="calc-card">
+          <div class="calc-sliders">
+            <div class="calc-row">
+              <div class="calc-label-val">
+                <span>Household Size:</span>
+                <span id="familySizeLabel">3 people</span>
+              </div>
+              <input
+                type="range"
+                id="familySizeSlider"
+                min="1"
+                max="8"
+                value="3"
+                oninput="updateCalculator()"
+              />
+            </div>
+
+            <div class="calc-row">
+              <div class="calc-label-val">
+                <span>Weekly Grocery Expense:</span>
+                <span id="spendLabel">₱4,500</span>
+              </div>
+              <input
+                type="range"
+                id="spendSlider"
+                min="1000"
+                max="25000"
+                step="250"
+                value="4500"
+                oninput="updateCalculator()"
+              />
+            </div>
+
+            <p style="font-size: 0.85rem; color: #d1fae5; line-height: 1.4">
+              *Estimates derived from average Philippine urban household
+              food-waste audits (~18% of grocery budgets are lost to unconsumed
+              expired items).
             </p>
-            <a href="pages/about.html">
-                <button>Learn More</button>
-            </a>
-        </section>
+          </div>
 
+          <div class="calc-results">
+            <div class="result-box">
+              <h4>Estimated Annual Savings</h4>
+              <div class="big-number" id="annualSavingsVal">₱42,120</div>
+              <small>Pesos preserved directly in your family budget</small>
+            </div>
 
-        <!-- Call to Action -->
-        <section class="cta-section">
-            <h2>Ready to Get Started?</h2>
+            <div class="result-box">
+              <h4>Landfill Food Waste Prevented</h4>
+              <div class="big-number" id="wasteDivertedVal">148 kg</div>
+              <small>Equivalent to ~285 kg of CO₂ emission reduction</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <h2>Frequently Asked Questions</h2>
+          <p>
+            Everything you need to know about ShelfLife expiry and emergency
+            management.
+          </p>
+        </div>
+
+        <div class="faq-accordion">
+          <div class="faq-item active">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span
+                >How often should I rotate items in my Emergency Go-Bag?</span
+              >
+              <span class="faq-chevron">▲</span>
+            </button>
+            <div class="faq-answer">
+              Standard disaster preparedness recommendations suggest rotating
+              food rations, water purification drops, and medications every 6
+              months. Tagging them in ShelfLife alerts you well before they
+              expire.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span
+                >Will my items stay saved if I close or refresh the
+                website?</span
+              >
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              Yes! In Guest Mode, items automatically persist in your browser's
+              <code>localStorage</code>. Signing into your account unlocks
+              multi-device cloud synchronization.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              <span>How does the dynamic expiry urgency calculation work?</span>
+              <span class="faq-chevron">▼</span>
+            </button>
+            <div class="faq-answer">
+              ShelfLife calculates the remaining days between today's date and
+              the item's expiration date. It automatically flags items as
+              <strong>Expired</strong> (&le; 0 days),
+              <strong>Use Today</strong> (0 days),
+              <strong>Expiring Soon</strong> (&le; 3 days), or
+              <strong>Fresh</strong> (&gt; 3 days)[cite: 1].
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <h4>🌱 ShelfLife</h4>
             <p>
-                Create an account and start organizing
-                your household items.
+              Smart, accessible household inventory tracking to reduce grocery
+              waste and ensure disaster readiness for families.
             </p>
-            <a href="pages/signup.html">
-                <button>Sign Up</button>
-            </a>
-        </section>
-
-        
-        <!-- Footer -->
-        <footer>
-            <p>
-                &copy; 2026 Household Expiration Tracker
+          </div>
+          <div>
+            <h5 style="color: var(--white); margin-bottom: 12px">Navigation</h5>
+            <ul class="footer-links">
+              <li><a href="#features">Features</a></li>
+              <li><a href="#tracker">Live Tracker</a></li>
+              <li><a href="#gobag">Emergency Go-Bag</a></li>
+              <li><a href="#calculator">₱ Calculator</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 style="color: var(--white); margin-bottom: 12px">
+              Tracked Zones
+            </h5>
+            <ul class="footer-links">
+              <li><a href="#tracker">Emergency Go-Bag</a></li>
+              <li><a href="#tracker">Refrigerator</a></li>
+              <li><a href="#tracker">Dry Pantry</a></li>
+              <li><a href="#tracker">Medicine Cabinet</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5 style="color: var(--white); margin-bottom: 12px">
+              Currency & Region
+            </h5>
+            <p style="font-size: 0.85rem; margin-bottom: 10px">
+              Configured to <strong>Philippine Peso (₱ / PHP)</strong>.
             </p>
-        </footer>
+            <span style="font-size: 0.75rem; color: var(--slate-500)"
+              >Disaster Prep & Expiry Monitor</span
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 ShelfLife. All rights reserved.</p>
+          <p>Pure HTML5 • Modern CSS • Vanilla ES6 JavaScript</p>
+        </div>
+      </div>
+    </footer>
 
-    </main>
+    <!-- Sign In / Sign Up Modal -->
+    <div
+      class="modal-backdrop"
+      id="authModal"
+      onclick="closeModalOutside(event, 'authModal')"
+    >
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="authModalTitle">Sign In to ShelfLife</h3>
+          <button class="modal-close" onclick="closeModal('authModal')">
+            ✕
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="authForm" onsubmit="handleAuthSubmit(event)">
+            <div style="margin-bottom: 14px">
+              <label
+                style="
+                  display: block;
+                  font-size: 0.8rem;
+                  font-weight: 700;
+                  margin-bottom: 4px;
+                "
+                >Email Address</label
+              >
+              <input
+                type="email"
+                id="authEmailInput"
+                placeholder="name@domain.com"
+                required
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  border-radius: 6px;
+                  border: 1px solid var(--slate-300);
+                "
+              />
+            </div>
+            <div style="margin-bottom: 20px">
+              <label
+                style="
+                  display: block;
+                  font-size: 0.8rem;
+                  font-weight: 700;
+                  margin-bottom: 4px;
+                "
+                >Password</label
+              >
+              <input
+                type="password"
+                id="authPassInput"
+                placeholder="••••••••"
+                required
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  border-radius: 6px;
+                  border: 1px solid var(--slate-300);
+                "
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="width: 100%"
+              id="authSubmitBtn"
+            >
+              Sign In
+            </button>
+          </form>
+          <div style="text-align: center; margin-top: 16px">
+            <a
+              href="javascript:void(0)"
+              onclick="toggleAuthMode()"
+              id="authToggleLink"
+              style="
+                font-size: 0.85rem;
+                color: var(--primary);
+                font-weight: 600;
+              "
+              >Need an account? Create one</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Non-blocking Toasts -->
+    <div class="toast-container" id="toastContainer"></div>
 
-    <script src="js/script.js"></script>
-
-</body>
-
+    <script src="index.js"></script>
+  </body>
 </html>
